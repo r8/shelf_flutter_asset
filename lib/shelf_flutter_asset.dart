@@ -19,7 +19,7 @@ Handler createAssetHandler({MimeTypeResolver? contentTypeResolver}) {
     final contentType = mimeResolver.lookup(key);
 
     final headers = {
-      HttpHeaders.contentLengthHeader: body.length,
+      HttpHeaders.contentLengthHeader: '${body.length}',
       if (contentType != null) HttpHeaders.contentTypeHeader: contentType,
     };
 
