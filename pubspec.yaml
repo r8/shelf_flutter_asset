@@ -1,7 +1,8 @@
 name: shelf_flutter_asset
-description: A new Flutter package project.
+description: A shelf handler to serve files from Flutter assets.
 version: 0.0.1
 homepage: https://github.com/r8/shelf_flutter_asset
+repository: https://github.com/r8/shelf_flutter_asset
 
 environment:
   sdk: '>=2.18.6 <3.0.0'
