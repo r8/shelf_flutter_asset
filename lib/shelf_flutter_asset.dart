@@ -14,15 +14,26 @@ Handler createAssetHandler({MimeTypeResolver? contentTypeResolver}) {
     final segments = ['assets', ...request.url.pathSegments];
 
     final key = p.joinAll(segments);
-    final body = (await rootBundle.load(key)).buffer.asUint8List();
 
-    final contentType = mimeResolver.lookup(key);
+    try {
+      final body = await _loadResource(key);
 
-    final headers = {
-      HttpHeaders.contentLengthHeader: '${body.length}',
-      if (contentType != null) HttpHeaders.contentTypeHeader: contentType,
-    };
+      final contentType = mimeResolver.lookup(key);
 
-    return Response.ok(body, headers: headers);
+      final headers = {
+        HttpHeaders.contentLengthHeader: '${body.length}',
+        if (contentType != null) HttpHeaders.contentTypeHeader: contentType,
+      };
+
+      return Response.ok(body, headers: headers);
+    } catch (_) {
+      return Response.notFound('Not Found');
+    }
   };
+}
+
+Future<Uint8List> _loadResource(String key) async {
+  final byteData = await rootBundle.load(key);
+
+  return byteData.buffer.asUint8List();
 }
