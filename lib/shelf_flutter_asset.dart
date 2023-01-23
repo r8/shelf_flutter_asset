@@ -7,6 +7,10 @@ import 'dart:io';
 /// The default resolver for MIME types.
 final _defaultMimeTypeResolver = MimeTypeResolver();
 
+/// Creates a Shelf [Handler] that serves files from Flutter assets.
+///
+/// Specify a custom [contentTypeResolver] to customize automatic content type
+/// detection.
 Handler createAssetHandler({MimeTypeResolver? contentTypeResolver}) {
   final mimeResolver = contentTypeResolver ?? _defaultMimeTypeResolver;
 
