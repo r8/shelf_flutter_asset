@@ -3,6 +3,6 @@ body {
 }
 
 .logo img {
-    padding: 2em;
-    width: 20%;
+    padding: 2em 0 2em 0;
+    width: 50%;
 }
