@@ -16,7 +16,7 @@ import 'package:shelf/shelf_io.dart' as io;
 import 'package:shelf_flutter_asset/shelf_flutter_asset.dart';
 
 void main() {
-  var assetHandler = createAssetHandler();
+  var assetHandler = createAssetHandler(defaultDocument: 'index.html');
 
   io.serve(assetHandler, 'localhost', 8080);
 }
