@@ -4,7 +4,7 @@ import 'package:shelf_flutter_asset/shelf_flutter_asset.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 void main() {
-  var assetHandler = createAssetHandler();
+  var assetHandler = createAssetHandler(defaultDocument: 'index.html');
 
   io.serve(assetHandler, 'localhost', 8080);
 
@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
-      ..loadRequest(Uri.parse('http://localhost:8080/index.html'));
+      ..loadRequest(Uri.parse('http://localhost:8080'));
   }
 
   @override
