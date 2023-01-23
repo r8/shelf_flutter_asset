@@ -1,7 +1,7 @@
 # shelf_flutter_asset
 
 [![build status](https://github.com/r8/shelf_flutter_asset/workflows/tests/badge.svg)](https://github.com/r8/shelf_flutter_asset/actions)
-[![codecov](https://codecov.io/gh/r8/shelf_flutter_asset/branch/main/graph/badge.svg)](https://codecov.io/gh/r8/shelf_flutter_asset)
+[![codecov](https://codecov.io/gh/r8/shelf_flutter_asset/branch/main/graph/badge.svg?token=DXWQ52MGBI)](https://codecov.io/gh/r8/shelf_flutter_asset)
 [![pub package](https://img.shields.io/pub/v/shelf_flutter_asset.svg)](https://pub.dev/packages/shelf_flutter_asset)
 [![package publisher](https://img.shields.io/pub/publisher/shelf_flutter_asset.svg)](https://pub.dev/packages/shelf_flutter_asset/publisher)
 
