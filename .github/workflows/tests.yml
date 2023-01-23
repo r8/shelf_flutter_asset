@@ -1,4 +1,4 @@
-name: CI
+name: tests
 
 on: [push, pull_request, workflow_dispatch]
 
@@ -14,3 +14,5 @@ jobs:
       - run: flutter analyze
       - run: flutter test --coverage
       - uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
