@@ -5,17 +5,42 @@
 [![pub package](https://img.shields.io/pub/v/shelf_flutter_asset.svg)](https://pub.dev/packages/shelf_flutter_asset)
 [![package publisher](https://img.shields.io/pub/publisher/shelf_flutter_asset.svg)](https://pub.dev/packages/shelf_flutter_asset/publisher)
 
-A shelf handler to serve files from Flutter assets.
+A simple shelf handler to serve files from Flutter assets.
 
 ## Usage
+
+Bind as root handler:
 
 ```dart
 import 'package:shelf/shelf_io.dart' as io;
 import 'package:shelf_flutter_asset/shelf_flutter_asset.dart';
 
 void main() {
-  var handler = createAssetHandler();
+  var assetHandler = createAssetHandler();
 
-  io.serve(handler, 'localhost', 8080);
+  io.serve(assetHandler, 'localhost', 8080);
+}
+```
+
+Bind with [`shelf_router`](https://pub.dev/packages/shelf_router):
+
+```dart
+import 'package:shelf_router/shelf_router.dart';
+import 'package:shelf/shelf.dart';
+import 'package:shelf/shelf_io.dart' as io;
+
+void main() {
+  var app = Router();
+  final assetHandler = createAssetHandler();
+
+  app.get('/hello', (Request request) {
+    return Response.ok('hello-world');
+  });
+
+  app.get('/assets/<ignored|.*>', (Request request) {
+    return assetHandler(request.change(path: 'assets'));
+  });
+
+  io.serve(app, 'localhost', 8080);
 }
 ```
