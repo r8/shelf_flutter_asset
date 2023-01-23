@@ -1,3 +1,19 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:shelf_flutter_asset/shelf_flutter_asset.dart';
+class Counter {
+  int value = 0;
+
+  void increment() => value++;
+
+  void decrement() => value--;
+}
+
+void main() {
+  test('Counter value should be incremented', () {
+    final counter = Counter();
+
+    counter.increment();
+
+    expect(counter.value, 1);
+  });
+}
