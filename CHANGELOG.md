@@ -4,4 +4,4 @@
 
 ## 0.0.2
 
-* Add support for defaultDocument serving.
+* Add support for `defaultDocument` serving.

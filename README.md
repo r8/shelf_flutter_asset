@@ -5,7 +5,7 @@
 [![pub package](https://img.shields.io/pub/v/shelf_flutter_asset.svg)](https://pub.dev/packages/shelf_flutter_asset)
 [![package publisher](https://img.shields.io/pub/publisher/shelf_flutter_asset.svg)](https://pub.dev/packages/shelf_flutter_asset/publisher)
 
-A simple shelf handler to serve files from Flutter assets.
+A simple handler for the Shelf ecosystem to serve files from Flutter assets.
 
 ## Usage
 
