@@ -4,7 +4,7 @@ import 'package:shelf_flutter_asset/shelf_flutter_asset.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 void main() {
-  var assetHandler = createAssetHandler(defaultDocument: 'index.html');
+  final assetHandler = createAssetHandler(defaultDocument: 'index.html');
 
   io.serve(assetHandler, 'localhost', 8080);
 
