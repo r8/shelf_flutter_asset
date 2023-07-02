@@ -46,7 +46,8 @@ Handler createAssetHandler(
       if (contentType != null) HttpHeaders.contentTypeHeader: contentType,
     };
 
-    return Response.ok(body, headers: headers);
+    return Response.ok((request.method == 'HEAD') ? null : body,
+        headers: headers);
   };
 }
 

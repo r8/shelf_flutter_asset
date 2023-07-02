@@ -5,3 +5,7 @@
 ## 0.0.2
 
 * Add support for `defaultDocument` serving.
+
+## UNRELEASED
+
+* Correctly handle `HEAD` requests.
