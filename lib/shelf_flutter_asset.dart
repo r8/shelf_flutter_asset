@@ -16,12 +16,18 @@ final _defaultMimeTypeResolver = MimeTypeResolver();
 ///
 /// Specify a custom [contentTypeResolver] to customize automatic content type
 /// detection.
+///
+/// If your assets are not in the standard `assets` directory,
+/// or you want to share only subtree of the assets path structure,
+/// you may use [rootPath] argument to set the root directory for your handler.
 Handler createAssetHandler(
-    {String? defaultDocument, MimeTypeResolver? contentTypeResolver}) {
+    {String? defaultDocument,
+    String rootPath = 'assets',
+    MimeTypeResolver? contentTypeResolver}) {
   final mimeResolver = contentTypeResolver ?? _defaultMimeTypeResolver;
 
   return (Request request) async {
-    final segments = ['assets', ...request.url.pathSegments];
+    final segments = [rootPath, ...request.url.pathSegments];
 
     String key = p.joinAll(segments);
 

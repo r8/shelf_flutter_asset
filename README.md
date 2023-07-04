@@ -44,3 +44,26 @@ void main() {
   io.serve(app, 'localhost', 8080);
 }
 ```
+
+Bind with [`shelf_router`](https://pub.dev/packages/shelf_router) and custom root path:
+
+```dart
+import 'package:shelf_router/shelf_router.dart';
+import 'package:shelf/shelf.dart';
+import 'package:shelf/shelf_io.dart' as io;
+
+void main() {
+  var app = Router();
+  final assetHandler = createAssetHandler(rootPath: 'assets/html');
+
+  app.get('/hello', (Request request) {
+    return Response.ok('hello-world');
+  });
+
+  app.get('/assets/<ignored|.*>', (Request request) {
+    return assetHandler(request.change(path: 'assets/html'));
+  });
+
+  io.serve(app, 'localhost', 8080);
+}
+```
