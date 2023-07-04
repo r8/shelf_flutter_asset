@@ -6,6 +6,7 @@
 
 * Add support for `defaultDocument` serving.
 
-## UNRELEASED
+## 0.0.3
 
 * Correctly handle `HEAD` requests.
+* Add ability to set the root path for the handler
