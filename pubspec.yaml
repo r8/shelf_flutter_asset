@@ -1,8 +1,9 @@
 name: shelf_flutter_asset
 description: A simple handler for the Shelf ecosystem to serve files from Flutter assets.
-version: 0.0.3
+version: 0.0.4
 homepage: https://github.com/r8/shelf_flutter_asset
 repository: https://github.com/r8/shelf_flutter_asset
+issue_tracker: https://github.com/r8/shelf_flutter_asset/issues
 
 environment:
   sdk: '>=2.18.6 <3.0.0'
