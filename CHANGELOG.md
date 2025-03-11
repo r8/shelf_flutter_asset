@@ -2,6 +2,7 @@
 
 * Added HTTP cache-control support
 * Added HTTP range request support for partial content
+* Added support for conditional requests with If-Modified-Since
 
 ## 0.0.4
 

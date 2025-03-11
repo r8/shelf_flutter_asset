@@ -14,6 +14,7 @@ A simple handler for the Shelf ecosystem to serve files from Flutter assets.
 - Content type detection
 - Optional caching support with customizable max-age
 - Support for HTTP range requests
+- Support for conditional requests with If-Modified-Since
 
 ## Usage
 
