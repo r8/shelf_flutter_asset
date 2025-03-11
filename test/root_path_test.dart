@@ -16,7 +16,7 @@ void main() {
     final request = makeRequest(path: '/nested.html');
 
     final response = await handler(request);
-    expect(response.statusCode, HttpStatus.notFound);
+    expect(response.statusCode, equals(HttpStatus.notFound));
   });
 
   test('access valid path', () async {
@@ -25,6 +25,6 @@ void main() {
     final request = makeRequest(path: '/nested.html');
 
     final response = await handler(request);
-    expect(response.statusCode, HttpStatus.ok);
+    expect(response.statusCode, equals(HttpStatus.ok));
   });
 }
