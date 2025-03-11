@@ -17,7 +17,7 @@ void main() {
       final request = makeRequest();
 
       final response = await handler(request);
-      expect(response.statusCode, HttpStatus.notFound);
+      expect(response.statusCode, equals(HttpStatus.notFound));
     });
   });
 
@@ -28,7 +28,7 @@ void main() {
       final request = makeRequest();
 
       final response = await handler(request);
-      expect(response.statusCode, HttpStatus.ok);
+      expect(response.statusCode, equals(HttpStatus.ok));
     });
   });
 }
