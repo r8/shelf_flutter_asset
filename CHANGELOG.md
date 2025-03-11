@@ -1,3 +1,8 @@
+## 0.1.0
+
+* Added HTTP cache-control support
+* Added HTTP range request support for partial content
+
 ## 0.0.4
 
 * Update library metadata

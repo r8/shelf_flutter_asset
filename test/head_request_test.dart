@@ -16,9 +16,9 @@ void main() {
     final request = makeRequest();
 
     final response = await handler(request);
-    expect(response.statusCode, HttpStatus.ok);
+    expect(response.statusCode, equals(HttpStatus.ok));
     // GET response should have body
-    expect(response.isEmpty, false);
+    expect(response.isEmpty, equals(false));
   });
 
   test('access "/" with HEAD method', () async {
@@ -27,8 +27,8 @@ void main() {
     final request = makeRequest(method: 'HEAD');
 
     final response = await handler(request);
-    expect(response.statusCode, HttpStatus.ok);
+    expect(response.statusCode, equals(HttpStatus.ok));
     // HEAD response should not have body
-    expect(response.isEmpty, true);
+    expect(response.isEmpty, equals(true));
   });
 }

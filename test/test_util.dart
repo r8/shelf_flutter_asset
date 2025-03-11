@@ -21,6 +21,14 @@ setUpAssets() {
   });
 }
 
-Request makeRequest({String method = 'GET', String path = '/'}) {
-  return Request(method, Uri(scheme: 'http', host: 'localhost', path: path));
+Request makeRequest({
+  String method = 'GET',
+  String path = '/',
+  Map<String, String>? headers,
+}) {
+  return Request(
+    method,
+    Uri(scheme: 'http', host: 'localhost', path: path),
+    headers: headers,
+  );
 }
