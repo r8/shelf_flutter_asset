@@ -9,21 +9,8 @@ void main() {
   });
 
   group('Range Requests', () {
-    test('range request support disabled by default', () async {
+    test('range request returns valid range', () async {
       final handler = createAssetHandler();
-      final request = makeRequest(
-        path: '/index.html',
-        headers: {'range': 'bytes=0-10'},
-      );
-      final response = await handler(request);
-
-      expect(response.statusCode, equals(200));
-      expect(response.headers['accept-ranges'], isNull);
-      expect(response.headers['content-range'], isNull);
-    });
-
-    test('valid range request returns partial content', () async {
-      final handler = createAssetHandler(enableRangeRequests: true);
       final request = makeRequest(
         path: '/index.html',
         headers: {'range': 'bytes=0-10'},
@@ -41,7 +28,7 @@ void main() {
     });
 
     test('invalid range format returns 416', () async {
-      final handler = createAssetHandler(enableRangeRequests: true);
+      final handler = createAssetHandler();
       final request = makeRequest(
         path: '/index.html',
         headers: {'range': 'invalid-range-format'},
@@ -52,7 +39,7 @@ void main() {
     });
 
     test('range outside file bounds returns 416', () async {
-      final handler = createAssetHandler(enableRangeRequests: true);
+      final handler = createAssetHandler();
       final request = makeRequest(
         path: '/index.html',
         headers: {'range': 'bytes=100000-200000'},
@@ -64,7 +51,7 @@ void main() {
     });
 
     test('open-ended range request works', () async {
-      final handler = createAssetHandler(enableRangeRequests: true);
+      final handler = createAssetHandler();
       final request = makeRequest(
         path: '/index.html',
         headers: {'range': 'bytes=10-'},
@@ -77,7 +64,7 @@ void main() {
     });
 
     test('head request with range returns no body', () async {
-      final handler = createAssetHandler(enableRangeRequests: true);
+      final handler = createAssetHandler();
       final request = makeRequest(
         method: 'HEAD',
         path: '/index.html',

@@ -6,6 +6,9 @@ import 'package:mime/mime.dart';
 import 'package:path/path.dart' as p;
 import 'package:shelf/shelf.dart';
 
+/// Application start time used for Last-Modified headers
+final _appStartTime = DateTime.now();
+
 /// The default resolver for MIME types.
 final _defaultMimeTypeResolver = MimeTypeResolver();
 
@@ -28,14 +31,12 @@ const _defaultMaxAge = 3600;
 /// Set [enableCaching] to true to add cache-control headers with [maxAge] seconds
 /// (defaults to 1 hour).
 ///
-/// Set [enableRangeRequests] to true to support HTTP range requests for partial content.
 Handler createAssetHandler(
     {String? defaultDocument,
     String rootPath = 'assets',
     MimeTypeResolver? contentTypeResolver,
     bool enableCaching = false,
-    int maxAge = _defaultMaxAge,
-    bool enableRangeRequests = false}) {
+    int maxAge = _defaultMaxAge}) {
   final mimeResolver = contentTypeResolver ?? _defaultMimeTypeResolver;
 
   return (Request request) async {
@@ -59,18 +60,40 @@ Handler createAssetHandler(
 
     final contentType = mimeResolver.lookup(key);
 
+    // Use a fixed last-modified timestamp for static assets
+    // This is based on the application start time
+    final lastModified = _appStartTime;
+    final lastModifiedHeader = HttpDate.format(lastModified);
+
     final headers = {
       HttpHeaders.contentLengthHeader: '${body.length}',
       if (contentType != null) HttpHeaders.contentTypeHeader: contentType,
+      HttpHeaders.lastModifiedHeader: lastModifiedHeader,
     };
+
+    // Check if the resource has been modified since the client's version
+    final ifModifiedSince = request.headers[HttpHeaders.ifModifiedSinceHeader];
+    if (ifModifiedSince != null) {
+      try {
+        final clientDate = HttpDate.parse(ifModifiedSince);
+        // Compare dates, treating them as equal if they are within 1 second
+        // This helps with test reliability and HTTP date precision issues
+        final difference = lastModified.difference(clientDate).inSeconds.abs();
+        if (difference < 1) {
+          return Response.notModified(headers: headers);
+        }
+      } catch (_) {
+        // Invalid date format, ignore header
+      }
+    }
 
     // Add cache control headers if enabled
     if (enableCaching) {
       headers[HttpHeaders.cacheControlHeader] = 'max-age=$maxAge, public';
     }
 
-    // Handle range requests if enabled
-    if (enableRangeRequests && request.headers.containsKey('range')) {
+    // Handle range requests
+    if (request.headers.containsKey('range')) {
       return _handleRangeRequest(request, body, headers);
     }
 

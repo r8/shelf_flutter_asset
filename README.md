@@ -8,11 +8,13 @@
 A simple handler for the Shelf ecosystem to serve files from Flutter assets.
 
 ## Features
+
 - Serves files from Flutter assets
 - Support for default documents (like index.html)
 - Content type detection
 - Optional caching support with customizable max-age
-- Optional support for HTTP range requests
+- Support for HTTP range requests
+- Support for conditional requests with If-Modified-Since
 
 ## Usage
 
@@ -90,45 +92,6 @@ void main() {
     defaultDocument: 'index.html',
     enableCaching: true,    // Enable caching
     maxAge: 3600,           // Cache for 1 hour (in seconds)
-  );
-
-  io.serve(assetHandler, 'localhost', 8080);
-}
-```
-
-### Range Requests
-
-Support HTTP range requests for media files:
-
-```dart
-import 'package:shelf/shelf_io.dart' as io;
-import 'package:shelf_flutter_asset/shelf_flutter_asset.dart';
-
-void main() {
-  var assetHandler = createAssetHandler(
-    defaultDocument: 'index.html',
-    enableRangeRequests: true,  // Enable range requests for media streaming
-  );
-
-  io.serve(assetHandler, 'localhost', 8080);
-}
-```
-
-### Combined Features
-
-Use all features together:
-
-```dart
-import 'package:shelf/shelf_io.dart' as io;
-import 'package:shelf_flutter_asset/shelf_flutter_asset.dart';
-
-void main() {
-  var assetHandler = createAssetHandler(
-    defaultDocument: 'index.html',
-    rootPath: 'assets/web',
-    enableCaching: true,
-    maxAge: 86400,              // Cache for 1 day
-    enableRangeRequests: true,
   );
 
   io.serve(assetHandler, 'localhost', 8080);
